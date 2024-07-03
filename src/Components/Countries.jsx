@@ -22,7 +22,7 @@ const Countries = () => {
             setError(err);
             setLoading(false);
         })
-    });
+    }, []);
 
     const containerStyle = {
         display: 'flex',
