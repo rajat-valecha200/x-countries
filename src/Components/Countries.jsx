@@ -41,9 +41,9 @@ const Countries = () => {
     
     return (
         <div style={containerStyle}>
-            {countries.map((country) => (
-                <CountryCard key={country.abbr} name={country.name} flag={country.flag} abbr={country.abbr} />
-            ))}
+        {countries.map((country) => (
+            <CountryCard key={country.abbr} name={country.name} flag={country.flag} abbr={country.abbr} />
+        ))}
         </div>
     );
 }
