@@ -8,7 +8,7 @@ const Countries = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
-        fetch('https://xcountries-backend.azurewebsites.net/all')
+        fetch('https://restcountries.com/v3.1/all')
             .then((res) => {
                 if (!res.ok) {
                     throw new Error('Network response was not ok');
@@ -32,20 +32,21 @@ const Countries = () => {
         justifyContent: 'center',
         padding: '20px'
     };
+
     const searchBar = {
         display: 'flex',
         margin: 'auto',
         maxWidth: '500px',
         width: '100%',
         height: '35px'
-    }
+    };
 
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
     };
 
     const filteredCountries = countries.filter((country) =>
-        country.name.toLowerCase().includes(searchTerm.toLowerCase())
+        country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     if (loading) {
@@ -58,7 +59,7 @@ const Countries = () => {
 
     return (
         <div>
-            <div style={{backgroundColor:"#f4f4f4", padding: '10px'}}>
+            <div style={{ backgroundColor: "#f4f4f4", padding: '10px' }}>
                 <input
                     style={searchBar}
                     type="text"
@@ -71,14 +72,15 @@ const Countries = () => {
                 {filteredCountries.length > 0 ? (
                     filteredCountries.map((country) => (
                         <CountryCard
-                            name={country.name}
-                            flag={country.flag}
-                            abbr={country.abbr}
+                            key={country.cca3}
+                            name={country.name.common}
+                            flag={country.flags.png}
+                            abbr={country.cca3}
                             className="countryCard"
                         />
                     ))
                 ) : (
-                    searchTerm && <div></div>
+                    searchTerm && <div>No countries found</div>
                 )}
             </div>
         </div>
